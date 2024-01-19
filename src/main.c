@@ -1,18 +1,17 @@
 #include "../functions/mov.h"
 
-
 int main()
 {
     char choice; // variable for the decision of the player
     char name[50]; // variable for the name of the player
-    int win = 0; // variable for the win condition
     int x = 11; // variable for the position x of the player
     int y = 7;  // variable for the position y of the player
+    int win = 0; // variable for the win condition
     int z;
 
     keyPos(); // random position of the key
 
-//    system("clear");
+    system("clear");
 
     printf("\nWelcome my friend !\n");
     printf("I hope you're well.\n");
@@ -45,9 +44,6 @@ int main()
                     x--;
                     playerPos(x,y);
                     break;
-                } else if (z == 2){
-                    win = 1;
-                    break;
                 } else {
                     playerPos(x,y);
                     break;
@@ -58,9 +54,6 @@ int main()
                 if (z == 1){
                     x++;
                     playerPos(x,y);
-                    break;
-                } else if (z == 2){
-                    win = 1;
                     break;
                 } else {
                     playerPos(x,y);
@@ -73,9 +66,6 @@ int main()
                     y--;
                     playerPos(x,y);
                     break;
-                } else if (z == 2){
-                    win = 1;
-                    break;
                 } else {
                     playerPos(x,y);
                     break;
@@ -86,9 +76,6 @@ int main()
                 if (z == 1){
                     y++;
                     playerPos(x,y);
-                    break;
-                } else if (z == 2){
-                    win = 1;
                     break;
                 } else {
                     playerPos(x,y);

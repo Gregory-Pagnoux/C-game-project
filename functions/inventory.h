@@ -1,4 +1,4 @@
-#include "win.h"
+#include "win_gameOver.h"
 
 //structure of inventory
 typedef struct item
