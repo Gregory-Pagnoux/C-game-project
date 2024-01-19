@@ -1,12 +1,5 @@
-#include <stdio.h>
-#include <time.h>
-#include <stdbool.h>
-#include <stdlib.h>
-
-#include "../functions/map.h"
-#include "../functions/inventory.h"
 #include "../functions/mov.h"
-#include "../functions/win.h"
+
 
 int main()
 {
@@ -15,12 +8,15 @@ int main()
     int win = 0; // variable for the win condition
     int x = 11; // variable for the position x of the player
     int y = 7;  // variable for the position y of the player
+    int z;
 
     keyPos(); // random position of the key
 
+//    system("clear");
+
     printf("\nWelcome my friend !\n");
     printf("I hope you're well.\n");
-    printf("Welcome in Escape House.");
+    printf("Welcome in \033[1;31mEscape House\033[1;0m.");
     printf("\n\nWhat's your name ?\n\n");
     scanf("%c", name);
 
@@ -32,10 +28,10 @@ int main()
         printHouse();
 
         printf("\n\nYou can :\n");
-        printf("1. go to\n");
-        printf("2. back off\n");
-        printf("3. go to the left\n");
-        printf("4. go to the right\n");
+        printf("\033[1;32m1\033[1;0m. go \033[1;32mforward\033[1;0m\n");
+        printf("\033[1;34m2\033[1;0m. \033[1;34mback off\033[1;0m\n");
+        printf("\033[1;35m3\033[1;0m. go to the \033[1;35mleft\033[1;0m\n");
+        printf("\033[1;36m4\033[1;0m. go to the \033[1;36mright\033[1;0m\n");
         printf("(tap your number choice)\n\n");
         scanf("%s", &choice);
 
@@ -44,9 +40,13 @@ int main()
         switch (choice){
             case '1': // move forward
                 house[x][y] = ' '; // delete the previous position of the player on the map
-                if (colision(x-1,y) == 1){
+                z = colision(x-1,y); // check if the next position is a wall or a chest
+                if (z == 1){
                     x--;
                     playerPos(x,y);
+                    break;
+                } else if (z == 2){
+                    win = 1;
                     break;
                 } else {
                     playerPos(x,y);
@@ -54,9 +54,13 @@ int main()
                 }
             case '2': // move backward
                 house[x][y] = ' ';
-                if (colision(x+1,y) == 1){
+                z = colision(x+1,y);
+                if (z == 1){
                     x++;
                     playerPos(x,y);
+                    break;
+                } else if (z == 2){
+                    win = 1;
                     break;
                 } else {
                     playerPos(x,y);
@@ -64,9 +68,13 @@ int main()
                 }
             case '3': // move left
                 house[x][y] = ' ';
-                if (colision(x,y-1) == 1){
+                z = colision(x,y-1);
+                if (z == 1){
                     y--;
                     playerPos(x,y);
+                    break;
+                } else if (z == 2){
+                    win = 1;
                     break;
                 } else {
                     playerPos(x,y);
@@ -74,9 +82,13 @@ int main()
                 }
             case '4': // move right
                 house[x][y] = ' ';
-                if (colision(x,y+1) == 1){
+                z = colision(x,y+1);
+                if (z == 1){
                     y++;
                     playerPos(x,y);
+                    break;
+                } else if (z == 2){
+                    win = 1;
                     break;
                 } else {
                     playerPos(x,y);

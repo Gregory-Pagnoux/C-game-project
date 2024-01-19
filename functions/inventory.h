@@ -1,33 +1,18 @@
-#include <string.h>
+#include "win.h"
 
 //structure of inventory
-typedef struct inventory
+typedef struct item
 {
     char name[30];
     int quantity;
     int solidity;
-}inventory_t;
+}item_t;
 
 // function to add item to inventory
-void addItem(inventory_t *inventory, int *size, char *name, int quantity, int solidity)
-{
-    strcpy(inventory[*size].name, name);
-    inventory[*size].quantity = quantity;
-    inventory[*size].solidity = solidity;
-    *size += 1;
-}
-
-// function to remove item from inventory
-void removeItem(inventory_t *inventory, int *size, char *name)
-{
-    int i;
-    for(i = 0; i < *size; i++)
-    {
-        if(strcmp(inventory[i].name, name) == 0)
-        {
-            inventory[i] = inventory[*size - 1];
-            *size -= 1;
-            break;
-        }
-    }
+void addItem(item_t *item, char name[30], int quantity, int solidity){
+    item = (item_t*)malloc(sizeof(item_t));
+    strcpy(item->name, name);
+    item->quantity = quantity;
+    item->solidity = solidity;
+    return;
 }

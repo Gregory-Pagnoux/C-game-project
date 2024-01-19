@@ -1,3 +1,5 @@
+#include "inventory.h"
+
 //move the player on the next position
 void playerPos(int x, int y){
     house[x][y] = '.';
@@ -15,28 +17,29 @@ void keyPos(){
     return;
 }
 
+item_t *item = NULL;
+
 // colision with walls, door and and chests
 int colision(int x, int y){
     int validation = 0;
     if(house[x][y]==' '){
         validation++;
     } else if(house[x][y]=='C') {
-        if (house[x][y]==house[xKey][yKey]){
+        if (x == xKey && y ==yKey){
             printf("\n\nYou found the key !\n");
             house[xKey][yKey] = ' ';
-            addItem(1, 1, 'key', 1, 1);
+            addItem(item, "Key", 1, 1);
         } else {
-            printf("\n\nthere is no Key here\n");
-            house[xKey][yKey] = ' ';
+            printf("\n\nThere is no Key here.\n");
         }
-    } //else if (house[x][y]=='/'){
-        //if (winCondition(x, y) == 1){
-            //win = 1;
-            //validation++;
-            //removeItem(1, 1, 'key');
-        //} else {
-            //printf("\n\nYou need a key to open this door\n");
-        //}
-    //}
+    } else if (house[x][y]=='/'){
+        if (item != NULL){
+            validation = 2;
+        } else {
+            printf("\n\nYou need a key to open this door.\n");
+        }
+    } else {
+        printf("\n\nYou can't go there.\n");
+    }
     return validation;
 }
