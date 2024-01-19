@@ -45,7 +45,7 @@ void keyPos(){
     return;
 }
 
-int HP = 10; // HP of the player
+int HP = 20; // HP of the player
 
 // colision with walls, door and and chests
 int colision(int x, int y){

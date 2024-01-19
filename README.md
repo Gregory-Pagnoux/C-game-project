@@ -4,13 +4,13 @@ excercise :
 
 create a game in C with following criteria :
 - [x] maze game
-- [x] monsters
-- [x] inventory
-- [] save
 - [x] movement
 - [x] choice
+- [x] inventory
+- [x] monsters
 - [x] win
 - [x] death
+- [ ] save
 
 # ESCAPE HOUSE
 
