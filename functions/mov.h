@@ -17,15 +17,18 @@ int attack; // variable for the attack of the player
 int playerAttack(monstHP){
     attack = randomVal(8);
     monstHP = monstHP - attack;
+    printf("monster lost %d HP\n", attack);
     return monstHP;
 }
 
 int monsterAttack(int HP){
     monstAttack = randomVal(7);
     HP = HP - monstAttack;
+    printf("You lost %d HP\n", monstAttack);
     return HP;
 }
 
+item_t *item = NULL; // item pointer
 int xKey;
 int yKey;
 void keyPos(){
@@ -33,12 +36,16 @@ void keyPos(){
     yKey = rand() % 15;
     if (house[xKey][yKey] != 'C'){
         keyPos();
+    } else {
+        item = (item_t*)malloc(sizeof(item_t));
+        strcpy(item->name, "Key");
+        item->quantity = 1;
+        item->solidity = 1;
     }
     return;
 }
 
-item_t *item = NULL;
-int HP = 20; // HP of the player
+int HP = 10; // HP of the player
 
 // colision with walls, door and and chests
 int colision(int x, int y){
@@ -51,17 +58,18 @@ int colision(int x, int y){
         while (monstHP > 0 && HP > 0){
             printf("\n\nMonster HP: %d\n", monstHP);
             printf("Your HP: %d\n", HP);
-            monstHP = playerAttack(monstHP);
             printf("\nYou attacked the spider !\n");
-            HP = monsterAttack(HP);
-            printf("The spider attacked you !\n");
+            monstHP = playerAttack(monstHP);
             if (monstHP <= 0){
                 printf("\n\nYou killed the spider !\n");
                 house[x][y] = ' ';
-            } else if (HP <= 0){
-                system("clear");
-                printOver();
-                exit(0);
+            } else {
+                printf("The spider attacked you !\n");
+                HP = monsterAttack(HP);
+                if (HP <= 0){
+                    printOver();
+                    exit(0);
+                }
             }
         }
     } else if(house[x][y]=='C') {
@@ -73,7 +81,7 @@ int colision(int x, int y){
             printf("\n\nThere is no Key here.\n");
         }
     } else if (house[x][y]=='/'){
-        if (item != NULL){
+        if (item != NULL && strcmp(item->name, "Key") == 0){
             printf("\n\nYou opened the door !\n");
             printWin();
             exit(0);
